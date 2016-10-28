@@ -77,6 +77,8 @@ class z.cryptography.CryptographyMapper
         return @_map_reaction generic_message.reaction
       when 'text'
         return @_map_text generic_message.text, generic_message.message_id
+      when 'banking_transaction_data'
+        return @_map_banking_transaction_data generic_message.banking_transaction_data
       else
         @logger.log @logger.levels.WARN, "Skipped event '#{generic_message.message_id}' of unhandled type '#{generic_message.content}'"
         throw new z.cryptography.CryptographyError z.cryptography.CryptographyError::TYPE.UNHANDLED_TYPE
@@ -156,6 +158,14 @@ class z.cryptography.CryptographyMapper
         otr_key: new Uint8Array uploaded.otr_key?.toArrayBuffer()
         sha256: new Uint8Array uploaded.sha256?.toArrayBuffer()
       type: z.event.Client.CONVERSATION.ASSET_UPLOAD_COMPLETE
+    }
+
+  _map_banking_transaction_data: (banking_transaction_data) ->
+    return {
+      data:
+        iban: banking_transaction_data.iban
+        number_of_transactions: banking_transaction_data.banking_transactions.length
+      type: z.event.Client.CONVERSATION.BANKING_TRANSACTION_DATA
     }
 
   _map_cleared: (cleared) ->

@@ -44,6 +44,13 @@
 
           <!-- ko if: input().length === 0 -->
 
+            <!-- ko if: window.webkitSpeechRecognition -->
+              <span class="controls-right-button button-icon-large icon-microphone"
+                    data-bind="click: toggle_speech_recognition"
+                    data-uie-name="do-recognize">
+              </span>
+            <!-- /ko -->
+
             <!-- ko if: conversation_et().is_one2one() -->
               <span id="conversation-input-ephemeral"
                     class="controls-right-button conversation-input-ephemeral"

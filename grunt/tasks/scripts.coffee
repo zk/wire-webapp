@@ -41,6 +41,7 @@ module.exports = (grunt) ->
 
     grunt.config 'scripts',
       app: extract_sources "#{dist_path}/app.htm"
+      db_api: extract_sources "#{dist_path}/db_api.htm"
       auth_page: extract_sources "#{dist_path}/auth.htm"
       component: extract_sources "#{dist_path}/component.htm"
       vendor: extract_sources "#{dist_path}/vendor.htm"

@@ -45,6 +45,9 @@ class z.ViewModel.ConversationInputViewModel
 
     @ephemeral_timer = @conversation_et.ephemeral_timer
 
+    @is_recognizing = ko.observable false
+    @_initiate_speech_recognition()
+
     @conversation_has_focus = ko.observable(true).extend notify: 'always'
     @browser_has_focus = ko.observable true
 
@@ -101,6 +104,43 @@ class z.ViewModel.ConversationInputViewModel
   toggle_extensions_menu: ->
     amplify.publish z.event.WebApp.EXTENSIONS.GIPHY.SHOW
 
+  _initiate_speech_recognition: ->
+    return if not window.webkitSpeechRecognition
+    @speech_recognition = new window.webkitSpeechRecognition()
+    @speech_recognition.continuous = true
+    @speech_recognition.interimResults = true
+    @speech_recognition.lang = 'en-US'
+    $(window).on 'beforeunload.speech_recognition', =>
+      @speech_recognition.stop()
+
+  toggle_speech_recognition: ->
+    if @is_recognizing()
+      @speech_recognition.stop()
+      $(window).off 'beforeunload.speech_recognition'
+    else
+      @speech_recognition.start()
+
+      @speech_recognition.onend = ->
+        console.log 'recognition end'
+
+      @speech_recognition.onerror = (error) ->
+        console.log 'recognition error', error
+
+      @speech_recognition.onresult = (event) =>
+        console.log 'recognition results', event
+
+        recognized_text = ''
+        for result in event.results
+          console.log 'recognition result', result
+          recognized_text += result[0].transcript
+
+        @input recognized_text
+
+      @speech_recognition.onstart = ->
+        console.log 'recognition start'
+
+    @is_recognizing not @is_recognizing()
+
   ping: =>
     return if @ping_disabled()
 
@@ -122,6 +162,10 @@ class z.ViewModel.ConversationInputViewModel
       return @conversation_repository.delete_message_everyone @conversation_et(), message_et
     if message isnt message_et.get_first_asset().text
       @conversation_repository.send_message_edit message, message_et, @conversation_et()
+
+  send_text_to_speech: (message) =>
+    return if message.length is 0
+    @conversation_repository.send_text_to_speech message, @conversation_et
 
   set_ephemeral_timer: (millis) =>
     if not millis
@@ -205,6 +249,8 @@ class z.ViewModel.ConversationInputViewModel
 
     if @is_editing()
       @send_message_edit message, @edit_message_et()
+    else if @is_recognizing()
+      @send_text_to_speech message
     else
       @send_message message
 

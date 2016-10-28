@@ -58,6 +58,7 @@ module.exports = (grunt) ->
     'copy:dist_favicon'
     'includereplace:dist_index'
     'includereplace:dist_auth'
+    'includereplace:dist_db_api'
     'includereplace:dist_demo'
     'clean:dist_app'
   ]
@@ -96,6 +97,7 @@ module.exports = (grunt) ->
     'copy:deploy_favicon'
     'includereplace:deploy_index'
     'includereplace:deploy_auth'
+    'includereplace:deploy_db_api'
     'includereplace:deploy_demo'
     'clean:deploy_app'
     'uglify:deploy'

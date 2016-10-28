@@ -56,6 +56,7 @@ class z.main.App
     service.connect                 = new z.connect.ConnectService @auth.client
     service.connect_google          = new z.connect.ConnectGoogleService @auth.client
     service.cryptography            = new z.cryptography.CryptographyService @auth.client
+    service.db_api                  = new z.db_api.dbAPIService()
     service.giphy                   = new z.extension.GiphyService @auth.client
     service.search                  = new z.search.SearchService @auth.client
     service.storage                 = new z.storage.StorageService()
@@ -77,6 +78,7 @@ class z.main.App
     repository.storage             = new z.storage.StorageRepository @service.storage
     repository.cache               = new z.cache.CacheRepository()
     repository.cryptography        = new z.cryptography.CryptographyRepository @service.cryptography, repository.storage
+    repository.db_api              = new z.db_api.dbAPIRepository @service.db_api
     repository.giphy               = new z.extension.GiphyRepository @service.giphy
 
     repository.client              = new z.client.ClientRepository @service.client, repository.cryptography
@@ -93,7 +95,8 @@ class z.main.App
       repository.user,
       repository.giphy,
       repository.cryptography,
-      repository.links
+      repository.links,
+      repository.db_api
     )
 
     repository.bot                 = new z.bot.BotRepository @service.bot, repository.conversation
@@ -222,6 +225,7 @@ class z.main.App
       @logger.log @logger.levels.DEBUG,
         "App reload: '#{is_reload}', Document referrer: '#{document.referrer}', Location: '#{window.location.href}'"
 
+      return
       if is_reload and error.type not in [z.client.ClientError::TYPE.MISSING_ON_BACKEND, z.client.ClientError::TYPE.NO_LOCAL_CLIENT]
         @auth.client.execute_on_connectivity().then -> window.location.reload false
       else if navigator.onLine

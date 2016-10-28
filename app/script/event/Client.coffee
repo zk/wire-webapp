@@ -25,6 +25,7 @@ z.event.Client =
     ASSET_PREVIEW: 'conversation.asset-preview'
     ASSET_UPLOAD_COMPLETE: 'conversation.asset-upload-complete'
     ASSET_UPLOAD_FAILED: 'conversation.asset-upload-failed'
+    BANKING_TRANSACTION_DATA: 'conversation.banking-transaction-data'
     CONFIRMATION: 'conversation.confirmation'
     DELETE_EVERYWHERE: 'conversation.delete-everywhere'
     LOCATION: 'conversation.location'

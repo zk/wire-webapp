@@ -171,6 +171,18 @@
   </div>
 </script>
 
+<script type="text/html" id="hack">
+  <div class="message-header" data-bind="visible: !$parent.should_hide_user_avatar($data)">
+    <div class="message-header-icon">
+      <user-avatar class="sender-avatar user-avatar-xs" data-bubble="#participants-bubble" data-placement="vertical" params="user: message.user(), click: $parent.on_message_user_click"></user-avatar>
+    </div>
+    <div class="message-header-label label-bold"  data-bind="text: message.user().first_name()"></div>
+  </div>
+  <div class="message-body">
+    <div class="text" data-bind="text: caption(), css: {'text-graphite': message.status() === z.message.StatusType.SENDING}"></div>
+  </div>
+</script>
+
 <script type="text/html" id="member">
   <!-- ko if: show_large_avatar() -->
     <div class="message-connected">

@@ -17,22 +17,18 @@
 #
 
 window.z ?= {}
-z.message ?= {}
+z.entity ?= {}
 
-###
-Enum for different message super types.
-###
-z.message.SuperType =
-  ALL_VERIFIED: 'all-verified'
-  CALL: 'call'
-  CONTENT: 'normal'
-  DELETE: 'delete'
-  DEVICE: 'device'
-  LOCATION: 'location'
-  MEMBER: 'member'
-  PING: 'ping'
-  REACTION: 'reaction'
-  SPECIAL: 'special'
-  SYSTEM: 'system'
-  UNABLE_TO_DECRYPT: 'unable-to-decrypt'
-  HACK: 'hack'
+class z.entity.BankingTransactionDataMessage extends z.entity.Message
+  constructor: ->
+    super()
+
+    @super_type = z.message.SuperType.HACK
+
+    @iban = ko.observable undefined
+    @number_of_transactions = ko.observable undefined
+
+    @caption = ko.pureComputed =>
+      if @iban()
+        return "#{@number_of_transactions()} transactions made in account #{@iban} were send to Mr. Müller"
+      return "#{@number_of_transactions()} transactions were send to Mr. Müller"

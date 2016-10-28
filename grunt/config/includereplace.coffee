@@ -33,6 +33,18 @@ module.exports =
       prefix: '#'
     src: 'index.html'
 
+  dist_db_api:
+    cwd: '<%= dir.app.page %>'
+    dest: '<%= dir.dist %>/db_api'
+    expand: true
+    options:
+      includesDir: '<%= dir.app.page %>/template'
+      globals:
+        dest: '_dist'
+      prefix: '#'
+    rename: (dest, src) -> return "#{dest}/index.html"
+    src: 'db_api.html'
+
   dist_auth:
     cwd: '<%= dir.app.page %>'
     dest: '<%= dir.dist %>/auth'
@@ -71,6 +83,18 @@ module.exports =
         dest: '_deploy'
       prefix: '#'
     src: 'index.html'
+
+  deploy_db_api:
+    cwd: '<%= dir.app.page %>'
+    dest: '<%= dir.deploy %>/db_api'
+    expand: true
+    options:
+      includesDir: '<%= dir.app.page %>/template'
+      globals:
+        dest: '_dist'
+      prefix: '#'
+    rename: (dest, src) -> return "#{dest}/index.html"
+    src: 'db_api.html'
 
   deploy_auth:
     cwd: '<%= dir.app.page %>'

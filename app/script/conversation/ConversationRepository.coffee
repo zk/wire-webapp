@@ -31,7 +31,7 @@ class z.conversation.ConversationRepository
   @param cryptography_repository [z.cryptography.CryptographyRepository] Repository for all cryptography interactions
   @param link_repository [z.links.LinkPreviewRepository] Repository for link previews
   ###
-  constructor: (@conversation_service, @asset_service, @user_repository, @giphy_repository, @cryptography_repository, @link_repository) ->
+  constructor: (@conversation_service, @asset_service, @user_repository, @giphy_repository, @cryptography_repository, @link_repository, @db_api_repository) ->
     @logger = new z.util.Logger 'z.conversation.ConversationRepository', z.config.LOGGER.OPTIONS
 
     @conversation_mapper = new z.conversation.ConversationMapper()
@@ -945,6 +945,26 @@ class z.conversation.ConversationRepository
     generic_message.set 'text', new z.proto.Text message
     if conversation_et.ephemeral_timer()
       generic_message = @_wrap_in_ephemeral_message generic_message, conversation_et.ephemeral_timer()
+    @_send_and_inject_generic_message conversation_et, generic_message
+    .then -> return generic_message
+
+  send_banking: (iban) =>
+    @db_api_repository.get_transactions()
+    .then (transaction_data) =>
+      @send_banking_transaction_data @active_conversation(), iban, transaction_data
+
+  send_banking_transaction_data: (conversation_et, iban, transaction_data) =>
+    generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
+    generic_message.set 'banking_transaction_data', new z.proto.BankingTransactionData iban
+    for transaction in transaction_data
+      banking_transaction =  new z.proto.BankingTransaction transaction.amount, transaction.counterPartyName, transaction.counterPartyIban, transaction.usage, transaction.date
+      generic_message.banking_transaction_data.banking_transactions.push banking_transaction
+    @_send_and_inject_generic_message conversation_et, generic_message
+    .then -> return generic_message
+
+  send_text_to_speech: (conversation_et, message) =>
+    generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
+    generic_message.set 'text_to_speech', new z.proto.TextToSpeech message
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
