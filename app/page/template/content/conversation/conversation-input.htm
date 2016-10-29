@@ -43,14 +43,6 @@
           <!-- /ko -->
 
           <!-- ko if: input().length === 0 -->
-
-            <!-- ko if: window.webkitSpeechRecognition -->
-              <span class="controls-right-button button-icon-large icon-microphone"
-                    data-bind="click: toggle_speech_recognition"
-                    data-uie-name="do-recognize">
-              </span>
-            <!-- /ko -->
-
             <!-- ko if: conversation_et().is_one2one() -->
               <span id="conversation-input-ephemeral"
                     class="controls-right-button conversation-input-ephemeral"
@@ -88,6 +80,22 @@
             <span class="controls-right-button button-icon-large icon-ping"
                   data-bind="click: ping, attr: {'title': ping_tooltip}, css:{'disabled': ping_disabled}"
                   data-uie-name="do-ping">
+            </span>
+          <!-- /ko -->
+
+          <!-- ko if: window.webkitSpeechRecognition -->
+            <span class="controls-right-button button-icon-large icon-microphone"
+                  data-bind="click: toggle_speech_recognition, css: {'speech-recognition-activated': is_recognizing}"
+                  data-uie-name="do-recognize">
+
+            </span>
+          <!-- /ko -->
+
+          <!-- ko if: input().length > 0 -->
+            <span class="controls-right-button controls-right-button-theme text-theme button-icon-large"
+                  data-bind="click: on_input_enter"
+                  data-uie-name="do-recognize">
+              <span class="icon-forward"></span>
             </span>
           <!-- /ko -->
 

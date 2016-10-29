@@ -90,6 +90,15 @@
   margin-right: 12px;
 }
 
+.controls-right-button-theme {
+  border-radius: 16px;
+  background-color: currentColor;
+  span {
+    margin-left: 0;
+    color: #fff!important;
+  }
+}
+
 .conversation-input-ephemeral {
   position: relative;
 }
@@ -126,4 +135,17 @@
   top: -2px;
   background-color: #fff;
   line-height: 14px;
+}
+
+@keyframes pulsate-animation {to {opacity: .32}}
+.speech-recognition-activated {
+  color: @w-red;
+}
+
+.speech-recognition-activated:before {
+  animation: pulsate-animation;
+  animation-direction: alternate;
+  animation-duration: @animation-timing-slower * 2;
+  animation-iteration-count: infinite;
+  animation-timing-function: @ease-in-cubic;
 }

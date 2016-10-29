@@ -58,7 +58,7 @@ class z.ViewModel.ConversationInputViewModel
       return @conversation_et()?.input().length > 0
 
     @show_giphy_button = ko.pureComputed =>
-      return @has_text_input() and @conversation_et()?.input().length <= 15
+      return @has_text_input() and @conversation_et()?.input().length <= 15 and not @is_recognizing()
 
     @input = ko.pureComputed
       read: =>
@@ -121,23 +121,20 @@ class z.ViewModel.ConversationInputViewModel
       @speech_recognition.start()
 
       @speech_recognition.onend = ->
-        console.log 'recognition end'
+        @logger.log @logger.levels.DEBUG, 'Ended speech recognition'
 
       @speech_recognition.onerror = (error) ->
-        console.log 'recognition error', error
+        @logger.log @logger.levels.ERROR, 'Started speech recognition', error
 
       @speech_recognition.onresult = (event) =>
-        console.log 'recognition results', event
-
         recognized_text = ''
         for result in event.results
-          console.log 'recognition result', result
           recognized_text += result[0].transcript
 
         @input recognized_text
 
       @speech_recognition.onstart = ->
-        console.log 'recognition start'
+        @logger.log @logger.levels.DEBUG, 'Started speech recognition'
 
     @is_recognizing not @is_recognizing()
 
@@ -165,6 +162,7 @@ class z.ViewModel.ConversationInputViewModel
 
   send_text_to_speech: (message) =>
     return if message.length is 0
+    @is_recognizing false
     @conversation_repository.send_text_to_speech message, @conversation_et
 
   set_ephemeral_timer: (millis) =>
@@ -255,7 +253,7 @@ class z.ViewModel.ConversationInputViewModel
       @send_message message
 
     @input ''
-    $(event.target).focus()
+    $(event.target).focus() if event
 
   on_input_key_down: (data, event) =>
     switch event.keyCode
