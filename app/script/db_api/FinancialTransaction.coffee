@@ -28,7 +28,7 @@ class z.db_api.FinancialTransaction
     @date = transaction_data.date
 
     @id = z.util.murmurhash3(JSON.stringify(@to_json()), 'db_api') + ''
-    @catergory = z.db_api.FinancialTransactionCategory.HOME
+    @category = z.db_api.FinancialTransactionCategory.HOME
 
   to_json: ->
     return {

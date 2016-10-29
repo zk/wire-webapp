@@ -19,7 +19,7 @@
 window.z ?= {}
 z.db_api ?= {}
 
-class z.db_api.FinancialTransactionCategory
+z.db_api.FinancialTransactionCategory =
   ARTS: 'Arts'
   BUSINESS: 'Business'
   COMPUTERS: 'Computers'

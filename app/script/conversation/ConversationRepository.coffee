@@ -951,21 +951,19 @@ class z.conversation.ConversationRepository
   _is_hackathon_conversation: (conversation_et) =>
     return conversation_et.is_one2one() is true
 
-  send_banking: (iban) =>
-    console.log 1
+  report_financial_data: =>
     conversation_et = @active_conversation()
-    console.log 2, conversation_et
     return if not @_is_hackathon_conversation conversation_et
-    console.log 2
+
+    financial_account = undefined
 
     @db_api_repository.get_cash_accounts()
     .then (accounts_response) =>
-      console.log 'accounts_response', accounts_response
-    @db_api_repository.get_transactions()
+      financial_account = new z.db_api.FinancialAccount accounts_response[0]
+      return @db_api_repository.get_transactions()
     .then (transactions_response) =>
       return (new z.db_api.FinancialTransaction transaction for transaction in transactions_response)
     .then (financial_transactions) =>
-      console.log 'financial_transaction', financial_transactions
       # recognize categories
       return financial_transactions
     .then (financial_transactions) =>
@@ -977,7 +975,7 @@ class z.conversation.ConversationRepository
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
     generic_message.set 'financial_information', new z.proto.FinancialInformation()
 
-    generic_message.account = new z.proto.FinancialAccount financial_account if financial_account
+    generic_message.financial_information.account = new z.proto.FinancialAccount financial_account if financial_account
     for transaction in financial_transactions
       transaction_proto = new z.proto.FinancialTransaction transaction.id, transaction.category, transaction.amount, transaction.counter_party_name, transaction.counter_party_iban, transaction.usage, transaction.date
       generic_message.financial_information.transactions.push transaction_proto
