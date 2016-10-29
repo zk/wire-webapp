@@ -47,6 +47,8 @@ class z.ViewModel.ConversationInputViewModel
 
     @is_recognizing = ko.observable false
     @_initiate_speech_recognition()
+    @input_subscription = undefined
+    @speech_timeout = undefined
 
     @conversation_has_focus = ko.observable(true).extend notify: 'always'
     @browser_has_focus = ko.observable true
@@ -119,6 +121,14 @@ class z.ViewModel.ConversationInputViewModel
       $(window).off 'beforeunload.speech_recognition'
     else
       @speech_recognition.start()
+      @input_subscription = @input.subscribe (input_value) =>
+        window.clearTimeout @speech_timeout if @speech_timeout
+        if input_value
+          @speech_timeout = window.setTimeout =>
+            @logger.log @logger.levels.INFO, 'Speech input sent after timeout'
+            @input_subscription.dispose()
+            @on_input_enter()
+          , 1000
 
       @speech_recognition.onend = =>
         @logger.log @logger.levels.DEBUG, 'Ended speech recognition'

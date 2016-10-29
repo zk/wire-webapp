@@ -75,12 +75,16 @@ class z.cryptography.CryptographyMapper
         return @_map_location generic_message.location, generic_message.message_id
       when 'reaction'
         return @_map_reaction generic_message.reaction
-      when 'text_to_speech'
-        return @_map_text_to_speech generic_message.text_to_speech
       when 'text'
         return @_map_text generic_message.text, generic_message.message_id
       when 'financial_information'
         return @_map_financial_information generic_message.financial_information
+      when 'survey_answer'
+        return @_map_survey_answer generic_message.survey_answer
+      when 'survey_question'
+        return @_map_survey_question generic_message.survey_question
+      when 'text_to_speech'
+        return @_map_text_to_speech generic_message.text_to_speech
       else
         @logger.log @logger.levels.WARN, "Skipped event '#{generic_message.message_id}' of unhandled type '#{generic_message.content}'"
         throw new z.cryptography.CryptographyError z.cryptography.CryptographyError::TYPE.UNHANDLED_TYPE
@@ -224,14 +228,6 @@ class z.cryptography.CryptographyMapper
       @logger.log @logger.levels.ERROR, "Failed to map external message: #{error.message}", error
       throw new z.cryptography.CryptographyError z.cryptography.CryptographyError::TYPE.BROKEN_EXTERNAL
 
-  _map_financial_information: (financial_information) ->
-    return {
-      data:
-        iban: financial_information.account?.iban
-        number_of_transactions: financial_information.transactions.length
-      type: z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
-    }
-
   _map_hidden: (hidden) ->
     return {
       data:
@@ -311,6 +307,22 @@ class z.cryptography.CryptographyMapper
         nonce: event_id
         previews: text.link_preview.map (preview) -> preview.encode64()
       type: z.event.Backend.CONVERSATION.MESSAGE_ADD
+    }
+
+  _map_financial_information: (financial_information) ->
+    return {
+      data:
+        iban: financial_information.account?.iban
+        number_of_transactions: financial_information.transactions.length
+      type: z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
+    }
+
+  _map_survey_question: (survey_question) ->
+    return {
+      data:
+        question_id: survey_question.question_id
+        question: survey_question.question
+        survey_options: survey_question.survey_options
     }
 
   _map_text_to_speech: (text_to_speech) ->

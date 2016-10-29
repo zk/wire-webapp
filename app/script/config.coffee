@@ -20,6 +20,8 @@ window.z ?= {}
 
 
 z.config =
+  OTHER_NAME: '[OTHER NAME]'
+
   BROWSER_NOTIFICATION:
     TIMEOUT: 5000
     TITLE_LENGTH: 38
