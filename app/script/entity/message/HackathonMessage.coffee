@@ -20,4 +20,16 @@ class z.entity.HackathonMessage extends z.entity.Message
     super()
 
     @super_type = z.message.SuperType.HACKATHON
-    @hackathon_message_type = z.message.HackathonMessageType.FINANCIAL_INFORMATION
+    @hackathon_message_type = undefined
+
+  is_financial_information: =>
+    @hackathon_message_type is z.message.HackathonMessageType.FINANCIAL_INFORMATION
+
+  is_speech_input: =>
+    @hackathon_message_type is z.message.HackathonMessageType.SPEECH_INPUT
+
+  is_survey_answer: =>
+    @hackathon_message_type is z.message.HackathonMessageType.SURVEY_ANSWER
+
+  is_survey_question: =>
+    @hackathon_message_type is z.message.HackathonMessageType.SURVEY_QUESTION

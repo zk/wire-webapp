@@ -322,6 +322,7 @@ class z.cryptography.CryptographyMapper
       data:
         question_id: survey_question.question_id
         question: survey_question.question
+        show_options: survey_question.show_options
       type: z.event.Client.CONVERSATION.SURVEY_QUESTION
     }
 

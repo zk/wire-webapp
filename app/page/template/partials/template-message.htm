@@ -174,7 +174,7 @@
 <script type="text/html" id="hackathon">
   <div class="message-header">
     <div class="message-header-icon">
-      <span data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.FINANCIAL_INFORMATION">
+      <span data-bind="visible: message.is_financial_information()">
         <svg class="hackathon-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
           <g fill="#323639" fill-rule="evenodd">
             <polygon points="2 3 8 1 14 3 14 5 2 5"></polygon>
@@ -186,8 +186,8 @@
           </g>
         </svg>
       </span>
-      <span class="icon-microphone" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SPEECH_INPUT">      </span>
-      <span data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_ANSWER">
+      <span class="icon-microphone" data-bind="visible: message.is_speech_input()"></span>
+      <span data-bind="visible: message.is_survey_answer()">
         <svg class="hackathon-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
             <rect id="a" width="16" height="16" rx="8"></rect>
@@ -203,7 +203,7 @@
           </g>
         </svg>
       </span>
-      <span data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_QUESTION">
+      <span data-bind="visible: message.is_survey_question()">
         <svg class="hackathon-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
             <rect id="a" width="16" height="16" rx="8"></rect>
@@ -226,6 +226,17 @@
       <hr class="message-header-line" />
     </div>
   </div>
+  <!-- ko if: message.is_survey_question() -->
+    <div class="message-body">
+      <div class="message-body-survey-question text" data-bind="text: message.question"></div>
+      <!-- ko if: true -->
+        <div class="message-body-survey-options">
+          <div class="message-body-survey-option button" data-bind="click: $parent.click_on_survey_action, text: message.options()[0].content"></div>
+          <div class="message-body-survey-option button button-inverted" data-bind="text: message.options()[1].content"></div>
+        </div>
+      <!-- /ko -->
+    </div>
+  <!-- /ko -->
 </script>
 
 <script type="text/html" id="member">
