@@ -17,19 +17,10 @@
 #
 
 window.z ?= {}
-z.event ?= {}
+z.message ?= {}
 
-z.event.Client =
-  CONVERSATION:
-    ASSET_META: 'conversation.asset-meta'
-    ASSET_PREVIEW: 'conversation.asset-preview'
-    ASSET_UPLOAD_COMPLETE: 'conversation.asset-upload-complete'
-    ASSET_UPLOAD_FAILED: 'conversation.asset-upload-failed'
-    FINANCIAL_INFORMATION: 'conversation.financial_information'
-    CONFIRMATION: 'conversation.confirmation'
-    DELETE_EVERYWHERE: 'conversation.delete-everywhere'
-    LOCATION: 'conversation.location'
-    MESSAGE_DELETE: 'conversation.message-delete'
-    MESSAGE_HIDDEN: 'conversation.message-hidden'
-    REACTION: 'conversation.reaction'
-    UNABLE_TO_DECRYPT: 'conversation.unable-to-decrypt'
+z.message.HackathonMessageType =
+  FINANCIAL_INFORMATION: 'information'
+  SPEECH_INPUT: 'speech'
+  SURVEY_QUESTION: 'survey_question'
+  SURVEY_ANSWER: 'survey_answer'

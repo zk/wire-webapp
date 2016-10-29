@@ -78,8 +78,8 @@ class z.conversation.EventMapper
         message_et = @_map_event_voice_channel_deactivate event
       when z.event.Client.CONVERSATION.ASSET_META
         message_et = @_map_event_asset_meta event
-      when z.event.Client.CONVERSATION.BANKING_TRANSACTION_DATA
-        message_et = @_map_event_banking_transaction_data event
+      when z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
+        message_et = @_map_event_financial_information event
       when z.event.Client.CONVERSATION.DELETE_EVERYWHERE
         message_et = @_map_system_event_delete_everywhere event
       when z.event.Client.CONVERSATION.LOCATION
@@ -143,11 +143,6 @@ class z.conversation.EventMapper
     message_et.nonce = event.data.info.nonce
     return message_et
 
-  _map_event_banking_transaction_data: (event) ->
-    message_et = new z.entity.BankingTransactionDataMessage()
-    message_et.iban event.data.iban
-    message_et.number_of_transactions event.data.number_of_transactions
-
   ###
   Maps JSON data of conversation.connect_request message into message entity
 
@@ -163,6 +158,11 @@ class z.conversation.EventMapper
     message_et.visible false if not asset_et.text
     message_et.assets.push asset_et
     return message_et
+
+  _map_event_financial_information: (event) ->
+    message_et = new z.entity.FinancialInformationMessage()
+    message_et.iban event.data.iban
+    message_et.number_of_transactions event.data.number_of_transactions
 
   ###
   Maps JSON data of other message types currently ignored into message entity

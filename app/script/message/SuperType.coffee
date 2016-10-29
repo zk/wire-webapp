@@ -35,4 +35,4 @@ z.message.SuperType =
   SPECIAL: 'special'
   SYSTEM: 'system'
   UNABLE_TO_DECRYPT: 'unable-to-decrypt'
-  HACK: 'hack'
+  HACKATHON: 'hackathon'

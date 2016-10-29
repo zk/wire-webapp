@@ -77,8 +77,8 @@ class z.cryptography.CryptographyMapper
         return @_map_reaction generic_message.reaction
       when 'text'
         return @_map_text generic_message.text, generic_message.message_id
-      when 'banking_transaction_data'
-        return @_map_banking_transaction_data generic_message.banking_transaction_data
+      when 'financial_information'
+        return @_map_financial_information generic_message.financial_information
       else
         @logger.log @logger.levels.WARN, "Skipped event '#{generic_message.message_id}' of unhandled type '#{generic_message.content}'"
         throw new z.cryptography.CryptographyError z.cryptography.CryptographyError::TYPE.UNHANDLED_TYPE
@@ -160,14 +160,6 @@ class z.cryptography.CryptographyMapper
       type: z.event.Client.CONVERSATION.ASSET_UPLOAD_COMPLETE
     }
 
-  _map_banking_transaction_data: (banking_transaction_data) ->
-    return {
-      data:
-        iban: banking_transaction_data.iban
-        number_of_transactions: banking_transaction_data.banking_transactions.length
-      type: z.event.Client.CONVERSATION.BANKING_TRANSACTION_DATA
-    }
-
   _map_cleared: (cleared) ->
     return {
       conversation: cleared.conversation_id
@@ -229,6 +221,14 @@ class z.cryptography.CryptographyMapper
     .catch (error) ->
       @logger.log @logger.levels.ERROR, "Failed to map external message: #{error.message}", error
       throw new z.cryptography.CryptographyError z.cryptography.CryptographyError::TYPE.BROKEN_EXTERNAL
+
+  _map_financial_information: (financial_information) ->
+    return {
+      data:
+        iban: financial_information.financial_account?.iban
+        number_of_transactions: financial_information.financial_transactions.length
+      type: z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
+    }
 
   _map_hidden: (hidden) ->
     return {

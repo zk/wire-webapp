@@ -171,15 +171,18 @@
   </div>
 </script>
 
-<script type="text/html" id="hack">
-  <div class="message-header" data-bind="visible: !$parent.should_hide_user_avatar($data)">
+<script type="text/html" id="hackathon">
+  <div class="message-header">
     <div class="message-header-icon">
-      <user-avatar class="sender-avatar user-avatar-xs" data-bubble="#participants-bubble" data-placement="vertical" params="user: message.user(), click: $parent.on_message_user_click"></user-avatar>
+      <span class="icon-chat" data-bind="visible: message.member_message_type === z.message.SystemMessageType.CONVERSATION_CREATE || message.member_message_type === z.message.SystemMessageType.CONVERSATION_RESUME"></span>
+      <span class="icon-minus" data-bind="visible: message.type === z.event.Backend.CONVERSATION.MEMBER_LEAVE"></span>
+      <span class="icon-plus" data-bind="visible: message.type === z.event.Backend.CONVERSATION.MEMBER_JOIN"></span>
     </div>
-    <div class="message-header-label label-bold"  data-bind="text: message.user().first_name()"></div>
-  </div>
-  <div class="message-body">
-    <div class="text" data-bind="text: caption(), css: {'text-graphite': message.status() === z.message.StatusType.SENDING}"></div>
+    <div class="message-header-label">
+      <span class="label-bold" data-bind='text: message.sender_name()'></span>
+      <span class="ellipsis" data-bind="text: message.caption()"></span>
+      <hr class="message-header-line" />
+    </div>
   </div>
 </script>
 

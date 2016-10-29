@@ -19,11 +19,12 @@
 window.z ?= {}
 z.entity ?= {}
 
-class z.entity.BankingTransactionDataMessage extends z.entity.Message
+class z.entity.FinancialInformationMessage extends z.entity.Message
   constructor: ->
     super()
 
-    @super_type = z.message.SuperType.HACK
+    @super_type = z.message.SuperType.HACKATHON
+    @hackathon_message_type =
 
     @iban = ko.observable undefined
     @number_of_transactions = ko.observable undefined

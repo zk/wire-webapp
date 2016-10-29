@@ -955,10 +955,13 @@ class z.conversation.ConversationRepository
 
   send_banking_transaction_data: (conversation_et, iban, transaction_data) =>
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
-    generic_message.set 'banking_transaction_data', new z.proto.BankingTransactionData iban
+    generic_message.set 'financial_information', new z.proto.FinancialInformation()
+
+    generic_message.account = new z.proto.FinancialAccount iban if iban
     for transaction in transaction_data
-      banking_transaction =  new z.proto.BankingTransaction transaction.amount, transaction.counterPartyName, transaction.counterPartyIban, transaction.usage, transaction.date
-      generic_message.banking_transaction_data.banking_transactions.push banking_transaction
+      transcation =  new z.proto.FinacialTransaction transaction.amount, transaction.counterPartyName, transaction.counterPartyIban, transaction.usage, transaction.date
+      generic_message.financial_information.transactions.push transcation
+
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
