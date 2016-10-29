@@ -1,7 +1,3 @@
-#
-# Wire
-# Copyright (C) 2016 Wire Swiss GmbH
-#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -19,17 +15,9 @@
 window.z ?= {}
 z.entity ?= {}
 
-class z.entity.FinancialInformationMessage extends z.entity.HackathonMessage
+class z.entity.HackathonMessage extends z.entity.Message
   constructor: ->
     super()
 
     @super_type = z.message.SuperType.HACKATHON
     @hackathon_message_type = z.message.HackathonMessageType.FINANCIAL_INFORMATION
-
-    @iban = ko.observable undefined
-    @number_of_transactions = ko.observable undefined
-
-    @caption = ko.pureComputed =>
-      if @iban()
-        return " sent #{@number_of_transactions()} transactions made in account #{@iban} to Mr. Müller"
-      return " sent #{@number_of_transactions()} transactions to Mr. Müller"

@@ -949,18 +949,24 @@ class z.conversation.ConversationRepository
     .then -> return generic_message
 
   send_banking: (iban) =>
-    @db_api_repository.get_transactions()
-    .then (transaction_data) =>
-      @send_banking_transaction_data @active_conversation(), iban, transaction_data
+    conversation_et = @active_conversation()
+    return if not conversation_et.is_one2one()
 
-  send_banking_transaction_data: (conversation_et, iban, transaction_data) =>
+    @db_api_repository.get_transactions()
+    .then (transactions_response) =>
+      @send_financial_information conversation_et, iban, transactions_response
+
+  send_financial_information: (conversation_et, iban, transactions_response) =>
+    return if not conversation_et.is_one2one()
+
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
     generic_message.set 'financial_information', new z.proto.FinancialInformation()
 
     generic_message.account = new z.proto.FinancialAccount iban if iban
-    for transaction in transaction_data
-      transcation =  new z.proto.FinacialTransaction transaction.amount, transaction.counterPartyName, transaction.counterPartyIban, transaction.usage, transaction.date
-      generic_message.financial_information.transactions.push transcation
+    for transaction in transactions_response
+      financial_transaction = new z.db_api.FinancialTransaction transaction
+      transaction_prot = new z.proto.FinancialTransaction financial_transaction.id, financial_transaction.amount, financial_transaction.counter_party_name, financial_transaction.counter_party_iban, financial_transaction.usage, financial_transaction.date
+      generic_message.financial_information.transactions.push transaction_prot
 
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message

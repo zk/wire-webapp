@@ -17,19 +17,23 @@
 #
 
 window.z ?= {}
-z.entity ?= {}
+z.db_api ?= {}
 
-class z.entity.FinancialInformationMessage extends z.entity.HackathonMessage
-  constructor: ->
-    super()
+class z.db_api.FinancialTransaction
+  constructor: (transaction_data) ->
+    @amount = transaction_data.amount
+    @counter_party_name = transaction_data.counterPartyName
+    @counter_party_iban = transaction_data.counterPartyIban
+    @usage = transaction_data.usage
+    @date = transaction_data.date
 
-    @super_type = z.message.SuperType.HACKATHON
-    @hackathon_message_type = z.message.HackathonMessageType.FINANCIAL_INFORMATION
+    @id = z.util.murmurhash3(JSON.stringify(@to_json()), 'db_api') + ''
 
-    @iban = ko.observable undefined
-    @number_of_transactions = ko.observable undefined
-
-    @caption = ko.pureComputed =>
-      if @iban()
-        return " sent #{@number_of_transactions()} transactions made in account #{@iban} to Mr. Müller"
-      return " sent #{@number_of_transactions()} transactions to Mr. Müller"
+  to_json: ->
+    return {
+      amount: @amount
+      counter_party_name: @counter_party_name
+      counter_party_iban: @counter_party_iban
+      usage: @usage
+      date: @date
+    }

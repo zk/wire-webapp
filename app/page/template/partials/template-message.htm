@@ -174,9 +174,10 @@
 <script type="text/html" id="hackathon">
   <div class="message-header">
     <div class="message-header-icon">
-      <span class="icon-chat" data-bind="visible: message.member_message_type === z.message.SystemMessageType.CONVERSATION_CREATE || message.member_message_type === z.message.SystemMessageType.CONVERSATION_RESUME"></span>
-      <span class="icon-minus" data-bind="visible: message.type === z.event.Backend.CONVERSATION.MEMBER_LEAVE"></span>
-      <span class="icon-plus" data-bind="visible: message.type === z.event.Backend.CONVERSATION.MEMBER_JOIN"></span>
+      <span class="icon-account" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.FINANCIAL_INFORMATION"></span>
+      <span class="icon-microphone" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SPEECH_INPUT"></span>
+      <span class="icon-check" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_ANSWER"></span>
+      <span class="icon-pending" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_QUESTION"></span>
     </div>
     <div class="message-header-label">
       <span class="label-bold" data-bind='text: message.sender_name()'></span>

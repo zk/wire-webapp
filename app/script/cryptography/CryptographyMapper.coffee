@@ -225,8 +225,8 @@ class z.cryptography.CryptographyMapper
   _map_financial_information: (financial_information) ->
     return {
       data:
-        iban: financial_information.financial_account?.iban
-        number_of_transactions: financial_information.financial_transactions.length
+        iban: financial_information.account?.iban
+        number_of_transactions: financial_information.transactions.length
       type: z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
     }
 

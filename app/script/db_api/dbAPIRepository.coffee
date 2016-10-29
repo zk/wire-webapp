@@ -27,21 +27,24 @@ class z.db_api.dbAPIRepository
 
   get_addresses: =>
     @db_api_service.get_addresses()
-    .then (response) ->
-      console.log 'addresses response', response
+    .then (response) =>
+      @logger.log @logger.levels.DEBUG, 'DB API addresses response', response
+      return response
 
   get_cash_accounts: (iban) =>
     @db_api_service.get_cash_accounts iban
-    .then (response) ->
-      console.log 'cash accounts response', response
+    .then (response) =>
+      @logger.log @logger.levels.DEBUG, 'DB API cash accounts response', response
+      return response
 
   get_transactions: (iban) =>
     @db_api_service.get_transactions iban
-    .then (response) ->
-      console.log 'transactions response', response
+    .then (response) =>
+      @logger.log @logger.levels.DEBUG, "DB API transactions response - '#{response.length}'", response
       return response
 
   get_user_info: =>
     @db_api_service.get_user_info iban
-    .then (response) ->
-      console.log 'user info response', response
+    .then (response) =>
+      @logger.log @logger.levels.DEBUG, 'DB API user info response', response
+      return response
