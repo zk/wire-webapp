@@ -56,7 +56,7 @@ class z.main.App
     service.connect                 = new z.connect.ConnectService @auth.client
     service.connect_google          = new z.connect.ConnectGoogleService @auth.client
     service.cryptography            = new z.cryptography.CryptographyService @auth.client
-    service.db_api                  = new z.db_api.dbAPIService()
+    service.db_api                  = new z.db_api.DBAPIService()
     service.text_recognition        = new z.db_api.TextRecognition()
     service.giphy                   = new z.extension.GiphyService @auth.client
     service.search                  = new z.search.SearchService @auth.client
