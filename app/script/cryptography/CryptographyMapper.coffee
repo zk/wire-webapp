@@ -322,11 +322,12 @@ class z.cryptography.CryptographyMapper
       data:
         question_id: survey_question.question_id
         question: survey_question.question
-        survey_options: survey_question.survey_options
+      type: z.event.Client.CONVERSATION.SURVEY_QUESTION
     }
 
   _map_text_to_speech: (text_to_speech) ->
     return {
       data:
         content: "#{text_to_speech.content}"
+      type: z.event.Client.CONVERSATION.SPEECH_INPUT
     }

@@ -20,14 +20,14 @@ window.z ?= {}
 z.entity ?= {}
 
 class z.entity.FinancialInformationMessage extends z.entity.HackathonMessage
-  constructor: ->
+  constructor: (event_data) ->
     super()
 
     @super_type = z.message.SuperType.HACKATHON
     @hackathon_message_type = z.message.HackathonMessageType.FINANCIAL_INFORMATION
 
-    @iban = ko.observable undefined
-    @number_of_transactions = ko.observable undefined
+    @iban = ko.observable event_data.iban
+    @number_of_transactions = ko.observable event_data.number_of_transactions
 
     @caption = ko.pureComputed =>
       if @iban()

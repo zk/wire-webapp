@@ -78,20 +78,20 @@ class z.conversation.EventMapper
         message_et = @_map_event_voice_channel_deactivate event
       when z.event.Client.CONVERSATION.ASSET_META
         message_et = @_map_event_asset_meta event
-      when z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
-        message_et = @_map_event_financial_information event
       when z.event.Client.CONVERSATION.DELETE_EVERYWHERE
         message_et = @_map_system_event_delete_everywhere event
       when z.event.Client.CONVERSATION.LOCATION
         message_et = @_map_event_location event
+      when z.event.Client.CONVERSATION.UNABLE_TO_DECRYPT
+        message_et = @_map_system_event_unable_to_decrypt event
+      when z.event.Client.CONVERSATION.FINANCIAL_INFORMATION
+        message_et = @_map_event_financial_information event
       when z.event.Client.CONVERSATION.SPEECH_INPUT
         message_et = @_map_event_speech_input event
       when z.event.Client.CONVERSATION.SURVEY_ANSWER
         message_et = @_map_event_surveay_answer event
       when z.event.Client.CONVERSATION.SURVEY_QUESTION
         message_et = @_map_event_survey_question event
-      when z.event.Client.CONVERSATION.UNABLE_TO_DECRYPT
-        message_et = @_map_system_event_unable_to_decrypt event
       else
         message_et = @_map_event_ignored()
 
@@ -164,11 +164,6 @@ class z.conversation.EventMapper
     message_et.visible false if not asset_et.text
     message_et.assets.push asset_et
     return message_et
-
-  _map_event_financial_information: (event) ->
-    message_et = new z.entity.FinancialInformationMessage()
-    message_et.iban event.data.iban
-    message_et.number_of_transactions event.data.number_of_transactions
 
   ###
   Maps JSON data of other message types currently ignored into message entity
@@ -298,11 +293,6 @@ class z.conversation.EventMapper
   _map_event_rename: (event) ->
     message_et = new z.entity.RenameMessage()
     message_et.name = event.data.name
-    return message_et
-
-  _map_event_speech_input: (event) ->
-    message_et = new z.entity.SpeechInputMessage()
-    message_et.content = event.data.content
     return message_et
 
   ###
@@ -474,3 +464,12 @@ class z.conversation.EventMapper
     message_et = new z.entity.DeleteMessage()
     message_et.deleted_timestamp = new Date(event.data.deleted_time).getTime()
     return message_et
+
+  _map_event_financial_information: (event) ->
+    return new z.entity.FinancialInformationMessage event.data
+
+  _map_event_speech_input: (event) ->
+    return new z.entity.SpeechInputMessage event.data
+
+  _map_event_survey_question: (event) ->
+    return new z.entity.SurveyQuestionMessage event.data

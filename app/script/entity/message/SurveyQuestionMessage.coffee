@@ -16,11 +16,16 @@ window.z ?= {}
 z.entity ?= {}
 
 class z.entity.SurveyQuestionMessage extends z.entity.HackathonMessage
-  constructor: ->
+  constructor: (event_data) ->
     super()
 
     @super_type = z.message.SuperType.HACKATHON
     @hackathon_message_type = z.message.HackathonMessageType.SURVEY_QUESTION
 
+    @question = event_data.question
+    @question_id = event_data.question_id
+
+    @options = ko.observableArray [{content: 'Yes', action: 'report_banking_data'}, {content: 'No', action: ''}]
+
     @caption = ko.pureComputed ->
-      return ' wants to know'
+      return ' has a question to you'

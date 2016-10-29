@@ -16,11 +16,13 @@ window.z ?= {}
 z.entity ?= {}
 
 class z.entity.SpeechInputMessage extends z.entity.HackathonMessage
-  constructor: ->
+  constructor: (event_data) ->
     super()
 
     @super_type = z.message.SuperType.HACKATHON
     @hackathon_message_type = z.message.HackathonMessageType.SPEECH_INPUT
+
+    @content = event_data.content
 
     @caption = ko.pureComputed ->
       return ' sent a command via speech recognition'
