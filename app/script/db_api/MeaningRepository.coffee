@@ -10,6 +10,8 @@ class z.db_api.MeaningRepository
       text = transaction.counter_party_name + ' ' + transaction.usage
       @meaning_service.recognize text
       .then (recognition) =>
+        if transaction.usage?.includes 'Barauszahlung'
+          recognition = z.db_api.FinancialTransactionCategory.CASH_PAYMENT
         @logger.log "Category '#{transaction.category}' becomes '#{recognition}'"
         transaction.category = recognition
         resolve transaction

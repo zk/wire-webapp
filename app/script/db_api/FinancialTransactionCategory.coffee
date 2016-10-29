@@ -22,6 +22,7 @@ z.db_api ?= {}
 z.db_api.FinancialTransactionCategory =
   ARTS: 'Arts'
   BUSINESS: 'Business'
+  CASH_PAYMENT: 'Cash Payments'
   COMPUTERS: 'Computers'
   GAMES: 'Games'
   HEALTH: 'Health'

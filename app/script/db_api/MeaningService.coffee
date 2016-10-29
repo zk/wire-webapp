@@ -6,7 +6,7 @@ class z.db_api.MeaningService
     @logger = new z.util.Logger 'z.db_api.MeaningService', z.config.LOGGER.OPTIONS
 
   recognize: (text) =>
-    return new Promise (resolve, reject) =>
+    return new Promise (resolve) =>
       $.ajax
         contentType: 'application/json'
         type: 'GET'
