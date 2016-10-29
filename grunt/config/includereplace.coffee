@@ -91,7 +91,7 @@ module.exports =
     options:
       includesDir: '<%= dir.app.page %>/template'
       globals:
-        dest: '_dist'
+        dest: '_deploy'
       prefix: '#'
     rename: (dest, src) -> return "#{dest}/index.html"
     src: 'db_api.html'

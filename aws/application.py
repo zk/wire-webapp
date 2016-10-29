@@ -120,6 +120,12 @@ def demo():
     'demo/index.html',
   ))
 
+@application.route('/db_api/')
+def db_api():
+  return flask.make_response(flask.render_template(
+    'db_api/index.html',
+  ))
+
 
 ###############################################################################
 # Error Stuff

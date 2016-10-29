@@ -57,13 +57,13 @@ class z.db_api.DBAPIService
 
   _get_client_id: ->
     if z.util.Environment.frontend.is_localhost()
-      return 'ca419a25-ebf2-4bd6-9bea-69e06444317d'
-    return 'b781e4a9-d914-4bc9-b51a-119e5fdd6167'
+      return 'dbd626d7-63db-4684-b9fc-47b688c671bf'
+    return '4c11bbf1-1e78-47eb-ae50-6322c78576d0'
 
   _get_redirect_url: ->
     if z.util.Environment.frontend.is_localhost()
       return 'http://localhost:8888/db_api'
-    return 'wire-webapp-edge.zinfra.io'
+    return 'https://wire-webapp-edge.wire.com/db_api'
 
   get_addresses: ->
     @_api_request
