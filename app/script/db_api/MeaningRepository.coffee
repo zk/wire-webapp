@@ -8,27 +8,27 @@ class z.db_api.MeaningRepository
   _map_category: (category) ->
     switch category
       when z.db_api.FinancialTransactionCategory.ARTS
-        return "🎨 " + z.db_api.FinancialTransactionCategory.ARTS
+        return '🎨 ' + z.db_api.FinancialTransactionCategory.ARTS
       when z.db_api.FinancialTransactionCategory.BUSINESS
-        return "💼 " + z.db_api.FinancialTransactionCategory.BUSINESS
+        return '💼 ' + z.db_api.FinancialTransactionCategory.BUSINESS
       when z.db_api.FinancialTransactionCategory.CASH_PAYMENT
-        return "💵 " + z.db_api.FinancialTransactionCategory.CASH_PAYMENT
+        return '💵 ' + z.db_api.FinancialTransactionCategory.CASH_PAYMENT
       when z.db_api.FinancialTransactionCategory.COMPUTERS
-        return "💻 " + z.db_api.FinancialTransactionCategory.COMPUTERS
+        return '💻 ' + z.db_api.FinancialTransactionCategory.COMPUTERS
       when z.db_api.FinancialTransactionCategory.GAMES
-        return "🎲 " + z.db_api.FinancialTransactionCategory.GAMES
+        return '🎲 ' + z.db_api.FinancialTransactionCategory.GAMES
       when z.db_api.FinancialTransactionCategory.HEALTH
-        return "💊 " + z.db_api.FinancialTransactionCategory.HEALTH
+        return '💊 ' + z.db_api.FinancialTransactionCategory.HEALTH
       when z.db_api.FinancialTransactionCategory.HOME
-        return "🏡 " + z.db_api.FinancialTransactionCategory.HOME
+        return '🏡 ' + z.db_api.FinancialTransactionCategory.HOME
       when z.db_api.FinancialTransactionCategory.RECREATION
-        return "🏕 " + z.db_api.FinancialTransactionCategory.RECREATION
+        return '🏕 ' + z.db_api.FinancialTransactionCategory.RECREATION
       when z.db_api.FinancialTransactionCategory.SCIENCE
-        return "🔬 " + z.db_api.FinancialTransactionCategory.SCIENCE
+        return '🔬 ' + z.db_api.FinancialTransactionCategory.SCIENCE
       when z.db_api.FinancialTransactionCategory.SOCIETY
-        return "😃 Entertainment"
+        return '😃 Entertainment'
       when z.db_api.FinancialTransactionCategory.SPORTS
-        return "⚽ " + z.db_api.FinancialTransactionCategory.SPORTS
+        return '⚽ ' + z.db_api.FinancialTransactionCategory.SPORTS
       else
         return category
 
