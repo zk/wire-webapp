@@ -1,7 +1,7 @@
 window.z ?= {}
 z.db_api ?= {}
 
-class z.db_api.TextRecognition
+class z.db_api.MeaningService
   constructor: ->
     @logger = new z.util.Logger 'z.db_api.dbAPIService', z.config.LOGGER.OPTIONS
 
