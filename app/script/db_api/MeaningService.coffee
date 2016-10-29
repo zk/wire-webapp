@@ -3,14 +3,15 @@ z.db_api ?= {}
 
 class z.db_api.MeaningService
   constructor: ->
-    @logger = new z.util.Logger 'z.db_api.dbAPIService', z.config.LOGGER.OPTIONS
+    @logger = new z.util.Logger 'z.db_api.MeaningService', z.config.LOGGER.OPTIONS
 
-  categorize: (text) =>
-    $.ajax
-      contentType: 'application/json'
-      type: 'GET'
-      url: "http://uclassify.com/browse/uClassify/Topics/ClassifyText?readkey=ZNpRwB2XLWed&text=" + encodeURIComponent(text) + "&output=json&version=1.01"
-    .done (data, textStatus, jqXHR) =>
-      console.log('yes', data)
-    .fail (jqXHR, textStatus, errorThrown) =>
-      console.log('no', errorThrown)
+  recognize: (text) =>
+    return new Promise (resolve, reject) =>
+      $.ajax
+        contentType: 'application/json'
+        type: 'GET'
+        url: "https://damp-bastion-14619.herokuapp.com/recognize/" + encodeURIComponent(text)
+      .done (data, textStatus, jqXHR) =>
+        resolve data
+      .fail (jqXHR, textStatus, errorThrown) =>
+        resolve z.db_api.FinancialTransactionCategory.HOME

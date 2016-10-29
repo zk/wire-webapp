@@ -89,6 +89,7 @@ class z.main.App
     repository.search              = new z.search.SearchRepository @service.search, repository.user
     repository.announce            = new z.announce.AnnounceRepository @service.announce
     repository.links               = new z.links.LinkPreviewRepository @service.asset
+    repository.meaning             = new z.db_api.MeaningRepository @service.meaning
 
     repository.conversation        = new z.conversation.ConversationRepository(
       @service.conversation,
@@ -98,6 +99,7 @@ class z.main.App
       repository.cryptography,
       repository.links,
       repository.db_api
+      repository.meaning
     )
 
     repository.bot                 = new z.bot.BotRepository @service.bot, repository.conversation

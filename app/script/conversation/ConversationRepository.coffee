@@ -31,7 +31,7 @@ class z.conversation.ConversationRepository
   @param cryptography_repository [z.cryptography.CryptographyRepository] Repository for all cryptography interactions
   @param link_repository [z.links.LinkPreviewRepository] Repository for link previews
   ###
-  constructor: (@conversation_service, @asset_service, @user_repository, @giphy_repository, @cryptography_repository, @link_repository, @db_api_repository) ->
+  constructor: (@conversation_service, @asset_service, @user_repository, @giphy_repository, @cryptography_repository, @link_repository, @db_api_repository, @meaning_repository) ->
     @logger = new z.util.Logger 'z.conversation.ConversationRepository', z.config.LOGGER.OPTIONS
 
     @conversation_mapper = new z.conversation.ConversationMapper()
@@ -963,9 +963,8 @@ class z.conversation.ConversationRepository
       return @db_api_repository.get_transactions()
     .then (transactions_response) ->
       return (new z.db_api.FinancialTransaction transaction for transaction in transactions_response)
-    .then (financial_transactions) ->
-      # recognize categories
-      return financial_transactions
+    .then (financial_transactions) =>
+      return @meaning_repository.update_categories financial_transactions
     .then (financial_transactions) =>
       @send_financial_information conversation_et, financial_account, financial_transactions
 
