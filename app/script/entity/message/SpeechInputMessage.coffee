@@ -23,4 +23,4 @@ class z.entity.SpeechInputMessage extends z.entity.HackathonMessage
     @hackathon_message_type = z.message.HackathonMessageType.SPEECH_INPUT
 
     @caption = ko.pureComputed ->
-      return ' sent a reply via speech recognition'
+      return ' sent a command via speech recognition'

@@ -84,6 +84,12 @@ class z.conversation.EventMapper
         message_et = @_map_system_event_delete_everywhere event
       when z.event.Client.CONVERSATION.LOCATION
         message_et = @_map_event_location event
+      when z.event.Client.CONVERSATION.SPEECH_INPUT
+        message_et = @_map_event_speech_input event
+      when z.event.Client.CONVERSATION.SURVEY_ANSWER
+        message_et = @_map_event_surveay_answer event
+      when z.event.Client.CONVERSATION.SURVEY_QUESTION
+        message_et = @_map_event_survey_question event
       when z.event.Client.CONVERSATION.UNABLE_TO_DECRYPT
         message_et = @_map_system_event_unable_to_decrypt event
       else
@@ -292,6 +298,11 @@ class z.conversation.EventMapper
   _map_event_rename: (event) ->
     message_et = new z.entity.RenameMessage()
     message_et.name = event.data.name
+    return message_et
+
+  _map_event_speech_input: (event) ->
+    message_et = new z.entity.SpeechInputMessage()
+    message_et.content = event.data.content
     return message_et
 
   ###

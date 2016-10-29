@@ -75,6 +75,8 @@ class z.cryptography.CryptographyMapper
         return @_map_location generic_message.location, generic_message.message_id
       when 'reaction'
         return @_map_reaction generic_message.reaction
+      when 'text_to_speech'
+        return @_map_text_to_speech generic_message.text_to_speech
       when 'text'
         return @_map_text generic_message.text, generic_message.message_id
       when 'financial_information'
@@ -309,4 +311,10 @@ class z.cryptography.CryptographyMapper
         nonce: event_id
         previews: text.link_preview.map (preview) -> preview.encode64()
       type: z.event.Backend.CONVERSATION.MESSAGE_ADD
+    }
+
+  _map_text_to_speech: (text_to_speech) ->
+    return {
+      data:
+        content: "#{text_to_speech.content}"
     }

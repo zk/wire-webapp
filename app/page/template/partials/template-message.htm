@@ -174,10 +174,51 @@
 <script type="text/html" id="hackathon">
   <div class="message-header">
     <div class="message-header-icon">
-      <span class="icon-account" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.FINANCIAL_INFORMATION"></span>
-      <span class="icon-microphone" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SPEECH_INPUT"></span>
-      <span class="icon-check" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_ANSWER"></span>
-      <span class="icon-pending" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_QUESTION"></span>
+      <span data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.FINANCIAL_INFORMATION">
+        <svg class="hackathon-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+          <g fill="#323639" fill-rule="evenodd">
+            <polygon points="2 3 8 1 14 3 14 5 2 5"></polygon>
+            <rect width="1" height="6" x="3" y="6"></rect>
+            <rect width="1" height="6" x="6" y="6"></rect>
+            <rect width="1" height="6" x="9" y="6"></rect>
+            <rect width="1" height="6" x="12" y="6"></rect>
+            <rect width="12" height="2" x="2" y="13" rx="1"></rect>
+          </g>
+        </svg>
+      </span>
+      <span class="icon-microphone" data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SPEECH_INPUT">      </span>
+      <span data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_ANSWER">
+        <svg class="hackathon-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <rect id="a" width="16" height="16" rx="8"></rect>
+            <mask id="b" width="16" height="16" x="0" y="0" fill="white">
+              <use xlink:href="#a"/>
+            </mask>
+          </defs>
+          <g fill="none" fill-rule="evenodd">
+            <use stroke="#323639" stroke-width="2" mask="url(#b)" xlink:href="#a"/>
+            <text fill="#323639" font-family="SFUIText-Semibold, SF UI Text" font-size="12" font-weight="500">
+              <tspan x="4" y="12">A</tspan>
+            </text>
+          </g>
+        </svg>
+      </span>
+      <span data-bind="visible: message.hackathon_message_type === z.message.HackathonMessageType.SURVEY_QUESTION">
+        <svg class="hackathon-svg-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <rect id="a" width="16" height="16" rx="8"></rect>
+            <mask id="b" width="16" height="16" x="0" y="0" fill="white">
+              <use xlink:href="#a"/>
+            </mask>
+          </defs>
+          <g fill="none" fill-rule="evenodd">
+            <use stroke="#323639" stroke-width="2" mask="url(#b)" xlink:href="#a"/>
+            <text fill="#323639" font-family="SFUIText-Semibold, SF UI Text" font-size="12" font-weight="500">
+              <tspan x="3.5" y="12">Q</tspan>
+            </text>
+          </g>
+        </svg>
+      </span>
     </div>
     <div class="message-header-label">
       <span class="label-bold" data-bind='text: message.sender_name()'></span>
