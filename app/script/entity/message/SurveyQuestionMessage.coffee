@@ -22,5 +22,5 @@ class z.entity.SurveyQuestionMessage extends z.entity.HackathonMessage
     @super_type = z.message.SuperType.HACKATHON
     @hackathon_message_type = z.message.HackathonMessageType.SURVEY_QUESTION
 
-    @caption = ko.pureComputed =>
+    @caption = ko.pureComputed ->
       return ' wants to know'

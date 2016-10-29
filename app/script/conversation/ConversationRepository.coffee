@@ -948,7 +948,7 @@ class z.conversation.ConversationRepository
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
-  _is_hackathon_conversation: (conversation_et) =>
+  _is_hackathon_conversation: (conversation_et) ->
     return conversation_et.is_one2one() is true
 
   report_financial_data: =>
@@ -961,9 +961,9 @@ class z.conversation.ConversationRepository
     .then (accounts_response) =>
       financial_account = new z.db_api.FinancialAccount accounts_response[0]
       return @db_api_repository.get_transactions()
-    .then (transactions_response) =>
+    .then (transactions_response) ->
       return (new z.db_api.FinancialTransaction transaction for transaction in transactions_response)
-    .then (financial_transactions) =>
+    .then (financial_transactions) ->
       # recognize categories
       return financial_transactions
     .then (financial_transactions) =>

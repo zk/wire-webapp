@@ -19,14 +19,14 @@
 window.z ?= {}
 z.db_api ?= {}
 
-class z.db_api.dbAPIService
+class z.db_api.DBAPIService
   URL_ADDRESSES: '/addresses'
   URL_CASHACCOUNTS: '/cashAccounts'
   URL_TRANSACTIONS: '/transactions'
   URL_USERINFO: '/userInfo'
 
   constructor: ->
-    @logger = new z.util.Logger 'z.db_api.dbAPIService', z.config.LOGGER.OPTIONS
+    @logger = new z.util.Logger 'z.db_api.DBAPIService', z.config.LOGGER.OPTIONS
     @rest_url = 'https://simulator-api.db.com:443'
     @api_url = '/gw/dbapi/v1'
 
@@ -67,23 +67,23 @@ class z.db_api.dbAPIService
 
   get_addresses: ->
     @_api_request
-      url: z.db_api.dbAPIService::URL_ADDRESSES
+      url: z.db_api.DBAPIService::URL_ADDRESSES
 
   get_cash_accounts: (iban) ->
     @_api_request
-      url: z.db_api.dbAPIService::URL_CASHACCOUNTS
+      url: z.db_api.DBAPIService::URL_CASHACCOUNTS
       data:
         iban: iban if iban
 
   get_transactions: (iban) ->
     @_api_request
-      url: z.db_api.dbAPIService::URL_TRANSACTIONS
+      url: z.db_api.DBAPIService::URL_TRANSACTIONS
       data:
         iban: iban if iban
 
   get_user_info: ->
     @_api_request
-      url: z.db_api.dbAPIService::URL_USERINFO
+      url: z.db_api.DBAPIService::URL_USERINFO
 
   _api_request: (config) =>
     @_get_access_token()
@@ -103,5 +103,5 @@ class z.db_api.dbAPIService
         @logger.log @logger.levels.OFF, "Server Response '#{jqXHR.wire.request_id}' from '#{config.url}':", data
         config.callback? data
         resolve data
-      .fail (jqXHR, textStatus, errorThrown) =>
+      .fail (jqXHR, textStatus, errorThrown) ->
         reject new Error errorThrown

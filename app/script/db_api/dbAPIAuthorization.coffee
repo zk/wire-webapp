@@ -1,7 +1,7 @@
 window.z ?= {}
 z.db_api ?= {}
 
-class z.db_api.dbAPIAuthorization
+class z.db_api.DBAPIAuthorization
   constructor: ->
     @opener_context = window.opener
     return window.location.replace 'https://wire.com' if not @opener_context
@@ -16,10 +16,6 @@ class z.db_api.dbAPIAuthorization
     @db_api_service.access_token if hash_parts[0].startsWith 'access_token' then hash_parts[0].split('=')[1]
     @db_api_service.access_token_type = if hash_parts[1].startsWith 'token_type' then hash_parts[1].split('=')[1]
     @db_api_service.access_token_expires_in if hash_parts[2].startsWith 'expires_in' then hash_parts[2].split('=')[1]
-
-    console.log 'access token', @db_api_service.access_token()
-    console.log 'type', @db_api_service.access_token_type
-    console.log 'expires', @db_api_service.access_token_expires_in()
     window.close()
 
   get_url_param: (name) ->
@@ -29,6 +25,7 @@ class z.db_api.dbAPIAuthorization
       return unescape value[1] if value[0] is name
     return null
 
+
 $ ->
   if $('#wire-db-api').length isnt 0
-    wire_db_api = new z.db_api.dbAPIAuthorization()
+    wire_db_api = new z.db_api.DBAPIAuthorization()

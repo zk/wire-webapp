@@ -56,7 +56,7 @@ class z.main.App
     service.connect                 = new z.connect.ConnectService @auth.client
     service.connect_google          = new z.connect.ConnectGoogleService @auth.client
     service.cryptography            = new z.cryptography.CryptographyService @auth.client
-    service.db_api                  = new z.db_api.dbAPIService()
+    service.db_api                  = new z.db_api.DBAPIService()
     service.giphy                   = new z.extension.GiphyService @auth.client
     service.search                  = new z.search.SearchService @auth.client
     service.storage                 = new z.storage.StorageService()
@@ -78,7 +78,7 @@ class z.main.App
     repository.storage             = new z.storage.StorageRepository @service.storage
     repository.cache               = new z.cache.CacheRepository()
     repository.cryptography        = new z.cryptography.CryptographyRepository @service.cryptography, repository.storage
-    repository.db_api              = new z.db_api.dbAPIRepository @service.db_api
+    repository.db_api              = new z.db_api.DBAPIRepository @service.db_api
     repository.giphy               = new z.extension.GiphyRepository @service.giphy
 
     repository.client              = new z.client.ClientRepository @service.client, repository.cryptography

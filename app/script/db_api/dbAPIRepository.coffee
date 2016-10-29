@@ -19,11 +19,9 @@
 window.z ?= {}
 z.db_api ?= {}
 
-class z.db_api.dbAPIRepository
+class z.db_api.DBAPIRepository
   constructor: (@db_api_service) ->
-    @logger = new z.util.Logger 'z.db_api.dbAPIRepository', z.config.LOGGER.OPTIONS
-
-  get_access_token: =>
+    @logger = new z.util.Logger 'z.db_api.DBAPIRepository', z.config.LOGGER.OPTIONS
 
   get_addresses: =>
     @db_api_service.get_addresses()
