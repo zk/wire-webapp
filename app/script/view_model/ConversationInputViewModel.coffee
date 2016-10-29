@@ -120,10 +120,10 @@ class z.ViewModel.ConversationInputViewModel
     else
       @speech_recognition.start()
 
-      @speech_recognition.onend = ->
+      @speech_recognition.onend = =>
         @logger.log @logger.levels.DEBUG, 'Ended speech recognition'
 
-      @speech_recognition.onerror = (error) ->
+      @speech_recognition.onerror = (error) =>
         @logger.log @logger.levels.ERROR, 'Started speech recognition', error
 
       @speech_recognition.onresult = (event) =>
@@ -133,7 +133,7 @@ class z.ViewModel.ConversationInputViewModel
 
         @input recognized_text
 
-      @speech_recognition.onstart = ->
+      @speech_recognition.onstart = =>
         @logger.log @logger.levels.DEBUG, 'Started speech recognition'
 
     @is_recognizing not @is_recognizing()
@@ -162,8 +162,10 @@ class z.ViewModel.ConversationInputViewModel
 
   send_text_to_speech: (message) =>
     return if message.length is 0
+    @logger.log @logger.levels.DEBUG, 'Sending text to speech message'
+    @speech_recognition.stop()
     @is_recognizing false
-    @conversation_repository.send_text_to_speech message, @conversation_et
+    @conversation_repository.send_text_to_speech @conversation_et(), message
 
   set_ephemeral_timer: (millis) =>
     if not millis

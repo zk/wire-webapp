@@ -19,22 +19,14 @@
 window.z ?= {}
 z.db_api ?= {}
 
-class z.db_api.FinancialTransaction
-  constructor: (transaction_data) ->
-    @amount = transaction_data.amount
-    @counter_party_name = transaction_data.counterPartyName
-    @counter_party_iban = transaction_data.counterPartyIban
-    @usage = transaction_data.usage
-    @date = transaction_data.date
-
-    @id = z.util.murmurhash3(JSON.stringify(@to_json()), 'db_api') + ''
-    @catergory = z.db_api.FinancialTransactionCategory.HOME
-
-  to_json: ->
-    return {
-      amount: @amount
-      counter_party_name: @counter_party_name
-      counter_party_iban: @counter_party_iban
-      usage: @usage
-      date: @date
-    }
+class z.db_api.FinancialTransactionCategory
+  ARTS: 'Arts'
+  BUSINESS: 'Business'
+  COMPUTERS: 'Computers'
+  GAMES: 'Games'
+  HEALTH: 'Health'
+  HOME: 'Home'
+  RECREATION: 'Recreation'
+  SCIENCE: 'Science'
+  SOCIETY: 'Society'
+  SPORTS: 'Sports'

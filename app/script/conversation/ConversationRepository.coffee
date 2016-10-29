@@ -948,30 +948,38 @@ class z.conversation.ConversationRepository
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
+  _is_hackathon_conversation: (conversation_et) =>
+    return if conversation_et.is_one2one()
+
   send_banking: (iban) =>
     conversation_et = @active_conversation()
-    return if not conversation_et.is_one2one()
+    return if not @_is_hackathon_conversation conversation_et
 
     @db_api_repository.get_transactions()
     .then (transactions_response) =>
-      @send_financial_information conversation_et, iban, transactions_response
+      return (new z.db_api.FinancialTransaction transaction for transaction in transactions_response)
+    .then (financial_transactions) =>
+      # recognize categories
+      return financial_transactions
+    .then (financial_transactions) =>
+      @send_financial_information conversation_et, iban, financial_transactions
 
-  send_financial_information: (conversation_et, iban, transactions_response) =>
-    return if not conversation_et.is_one2one()
+  send_financial_information: (conversation_et, iban, financial_transactions) =>
+    return if not @_is_hackathon_conversation conversation_et
 
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
     generic_message.set 'financial_information', new z.proto.FinancialInformation()
 
     generic_message.account = new z.proto.FinancialAccount iban if iban
-    for transaction in transactions_response
-      financial_transaction = new z.db_api.FinancialTransaction transaction
-      transaction_prot = new z.proto.FinancialTransaction financial_transaction.id, financial_transaction.amount, financial_transaction.counter_party_name, financial_transaction.counter_party_iban, financial_transaction.usage, financial_transaction.date
-      generic_message.financial_information.transactions.push transaction_prot
+    for transaction in financial_transactions
+      transaction_proto = new z.proto.FinancialTransaction transaction.id, transaction.category, transaction.amount, transaction.counter_party_name, transaction.counter_party_iban, transaction.usage, transaction.date
+      generic_message.financial_information.transactions.push transaction_proto
 
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
   send_text_to_speech: (conversation_et, message) =>
+    return if not @_is_hackathon_conversation conversation_et
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
     generic_message.set 'text_to_speech', new z.proto.TextToSpeech message
     @_send_and_inject_generic_message conversation_et, generic_message
