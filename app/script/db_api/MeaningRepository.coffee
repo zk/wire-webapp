@@ -28,7 +28,7 @@ class z.db_api.MeaningRepository
       when z.db_api.FinancialTransactionCategory.SOCIETY
         return "😃 Entertainment"
       when z.db_api.FinancialTransactionCategory.SPORTS
-        return "⚽ Sports"
+        return "⚽ " + z.db_api.FinancialTransactionCategory.SPORTS
       else
         return category
 
