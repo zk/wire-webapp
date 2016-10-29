@@ -31,5 +31,5 @@ class z.entity.FinancialInformationMessage extends z.entity.HackathonMessage
 
     @caption = ko.pureComputed =>
       if @iban()
-        return " shared your banking information with #{z.config.OTHER_NAME} (#{@number_of_transactions()} transactions, #{@iban()})"
+        return " shared your banking information with #{z.config.OTHER_NAME} (#{@number_of_transactions()} transactions, IBAN #{@iban()})"
       return " shared your banking information with #{z.config.OTHER_NAME} (#{@number_of_transactions()} transactions)"

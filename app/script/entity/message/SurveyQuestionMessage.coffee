@@ -26,7 +26,7 @@ class z.entity.SurveyQuestionMessage extends z.entity.HackathonMessage
     @question_id = event_data.question_id
 
     @options = ko.observableArray [{content: 'Yes', action: 'report_banking_data'}, {content: 'No', action: ''}]
-    @show_options = ko.observable false
+    @show_options = ko.observable event_data.show_options or false
 
     @caption = ko.pureComputed ->
       return ' has a question to you'

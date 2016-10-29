@@ -228,8 +228,8 @@
   </div>
   <!-- ko if: message.is_survey_question() -->
     <div class="message-body">
-      <div class="message-body-survey-question text" data-bind="text: message.question, title: "></div>
-      <!-- ko if: true -->
+      <div class="message-body-survey-question text" data-bind="text: message.question, attr: {title: message.show_options().toString()}"></div>
+      <!-- ko if: message.show_options() -->
         <div class="message-body-survey-options">
           <div class="message-body-survey-option button" data-bind="click: $parent.click_on_survey_action, text: message.options()[0].content"></div>
           <div class="message-body-survey-option button button-inverted" data-bind="text: message.options()[1].content"></div>
