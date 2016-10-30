@@ -172,10 +172,23 @@ class z.ViewModel.ConversationInputViewModel
 
   send_text_to_speech: (message) =>
     return if message.length is 0
-    @logger.log @logger.levels.DEBUG, 'Sending text to speech message'
     @speech_recognition.stop()
     @is_recognizing false
-    @conversation_repository.send_text_to_speech @conversation_et(), message
+
+    if message.startsWith('show me the money') or message.toLowerCase().includes('balance') or message.toLowerCase().includes 'belly'
+      message = 'balance'
+    else if message.toLowerCase().includes('spent') or message.toLowerCase().includes('spend') or message.toLowerCase().includes 'exp'
+      message = 'expenses'
+    else if message.toLowerCase().includes('earn') or message.toLowerCase().includes('pay') or message.toLowerCase().includes('paid') or message.toLowerCase().includes 'income'
+      message = 'income'
+    else
+      message = ''
+
+    if message
+      @logger.log @logger.levels.DEBUG, 'Sending text to speech message'
+      @conversation_repository.send_text_to_speech @conversation_et(), message
+
+    @input ''
 
   set_ephemeral_timer: (millis) =>
     if not millis

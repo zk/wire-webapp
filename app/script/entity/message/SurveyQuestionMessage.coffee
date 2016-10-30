@@ -29,4 +29,4 @@ class z.entity.SurveyQuestionMessage extends z.entity.HackathonMessage
     @show_options = ko.observable event_data.show_options or false
 
     @caption = ko.pureComputed ->
-      return ' has a question to you'
+      return ' has a question for you'
