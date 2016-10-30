@@ -22,7 +22,7 @@ class z.db_api.MeaningRepository
       when z.db_api.FinancialTransactionCategory.HOME
         return '🏡 ' + z.db_api.FinancialTransactionCategory.HOME
       when z.db_api.FinancialTransactionCategory.RECREATION
-        return '🍜 Food'
+        return '🍜 Groceries'
       when z.db_api.FinancialTransactionCategory.SCIENCE
         return '🔬 ' + z.db_api.FinancialTransactionCategory.SCIENCE
       when z.db_api.FinancialTransactionCategory.SOCIETY
