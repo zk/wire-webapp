@@ -20,7 +20,7 @@ window.z ?= {}
 
 
 z.config =
-  OTHER_NAME: '[OTHER NAME]'
+  OTHER_NAME: 'dbAPI Assistant'
 
   BROWSER_NOTIFICATION:
     TIMEOUT: 5000

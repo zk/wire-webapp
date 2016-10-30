@@ -25,4 +25,4 @@ class z.entity.SpeechInputMessage extends z.entity.HackathonMessage
     @content = event_data.content
 
     @caption = ko.pureComputed ->
-      return ' sent a command via speech recognition'
+      return ' sent a voice command to dbAPI Assistant'

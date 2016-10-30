@@ -26,4 +26,4 @@ class z.entity.SurveyAnswerMessage extends z.entity.HackathonMessage
     @answer_id = 1
 
     @caption = ko.pureComputed =>
-      return " answered Mueller question with '#{@answer}'"
+      return " answered #{z.config.OTHER_NAME} question with '#{@answer}'"
