@@ -204,6 +204,17 @@ class z.ViewModel.ConversationInputViewModel
 
     @conversation_repository.upload_images @conversation_et(), images
 
+  send_location: =>
+    on_success = (position) =>
+      lat = position.coords.latitude
+      long = position.coords.longitude
+      @conversation_repository.send_location @conversation_et(), lat, long
+
+    on_error = (error) ->
+      alert 'Please try again.'
+
+    window.navigator.geolocation.getCurrentPosition on_success, on_error
+
   _show_upload_warning: (image) ->
     warning = z.localization.Localizer.get_text
       id: if image.type is 'image/gif' then z.string.alert_gif_too_large else z.string.alert_upload_too_large
