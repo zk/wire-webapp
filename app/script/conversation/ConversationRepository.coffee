@@ -990,8 +990,6 @@ class z.conversation.ConversationRepository
     .then -> return generic_message
 
   send_location: (conversation_et, longitude, latitude) =>
-    console.log 'longitude', longitude
-    console.log 'latitude', latitude
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
     generic_message.set 'location', new z.proto.Location longitude, latitude, 'Berlin', 14
     @_send_and_inject_generic_message conversation_et, generic_message
