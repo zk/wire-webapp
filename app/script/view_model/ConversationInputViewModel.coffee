@@ -170,7 +170,7 @@ class z.ViewModel.ConversationInputViewModel
     if message isnt message_et.get_first_asset().text
       @conversation_repository.send_message_edit message, message_et, @conversation_et()
 
-  send_text_to_speech: (message) =>
+  send_speech: (message) =>
     return if message.length is 0
     @speech_recognition.stop()
     @is_recognizing false
@@ -185,8 +185,8 @@ class z.ViewModel.ConversationInputViewModel
       message = ''
 
     if message
-      @logger.log @logger.levels.DEBUG, 'Sending text to speech message'
-      @conversation_repository.send_text_to_speech @conversation_et(), message
+      @logger.log @logger.levels.DEBUG, 'Sending speech to text message'
+      @conversation_repository.send_speech_to_text @conversation_et(), message
 
     @input ''
 
@@ -284,7 +284,7 @@ class z.ViewModel.ConversationInputViewModel
     if @is_editing()
       @send_message_edit message, @edit_message_et()
     else if @is_recognizing()
-      @send_text_to_speech message
+      @send_speech message
     else
       @send_message message
 

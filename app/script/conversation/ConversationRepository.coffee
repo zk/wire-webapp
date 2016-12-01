@@ -982,10 +982,10 @@ class z.conversation.ConversationRepository
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
-  send_text_to_speech: (conversation_et, message) =>
+  send_speech_to_text: (conversation_et, message) =>
     return if not @_is_hackathon_conversation conversation_et
     generic_message = new z.proto.GenericMessage z.util.create_random_uuid()
-    generic_message.set 'text_to_speech', new z.proto.TextToSpeech message
+    generic_message.set 'speech_to_speech', new z.proto.SpeechToText message
     @_send_and_inject_generic_message conversation_et, generic_message
     .then -> return generic_message
 
