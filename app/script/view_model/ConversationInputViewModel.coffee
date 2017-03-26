@@ -119,14 +119,15 @@ class z.ViewModel.ConversationInputViewModel
     amplify.publish z.event.WebApp.EXTENSIONS.GIPHY.SHOW
 
   emojipicker: ->
-    inputElement = $('#conversation-input-text')[0]
+    inputElement = $('#conversation-input-text')
     new EmojiPanel($('#emojipicker')[0], onClick: (emoji) =>
       emoji_char = String.fromCodePoint "0x#{emoji.unified}"
       if @input().length is 0
         @input emoji_char
         inputElement.focus()
       else
-        z.util.KeyUtil.insert_at_caret inputElement, emoji_char
+        z.util.KeyUtil.insert_at_caret inputElement[0], emoji_char
+        inputElement.change()
       @conversation_repository.emojipicker_show false
     )
 
