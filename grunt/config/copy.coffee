@@ -29,6 +29,7 @@ module.exports =
     src: [
       'ext/image/**/*'
       'ext/js/**/*'
+      'ext/emoji-panel/**/*'
       'ext/proto/**/*'
       'audio/**/*'
       'image/**/*'
@@ -72,6 +73,7 @@ module.exports =
     src: [
       'ext/image/**/*'
       'ext/js/**/*'
+      'ext/emoji-panel/**/*'
       'ext/proto/**/*'
       'audio/**/*'
       'image/**/*'

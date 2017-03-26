@@ -75,6 +75,8 @@ class z.conversation.ConversationRepository
     @conversations_cleared = ko.observableArray []
     @conversations_unarchived = ko.observableArray []
 
+    @emojipicker_show = ko.observable false
+
     @_init_subscriptions()
 
   _init_state_updates: ->

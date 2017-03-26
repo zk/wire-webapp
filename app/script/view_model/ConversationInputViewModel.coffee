@@ -91,6 +91,7 @@ class z.ViewModel.ConversationInputViewModel
         return z.localization.Localizer.get_text z.string.tooltip_conversation_ephemeral
       return z.localization.Localizer.get_text z.string.tooltip_conversation_input_placeholder
     @ping_disabled = ko.observable false
+    @emoji_tooltip = z.localization.Localizer.get_text z.string.tooltip_conversation_emoji
 
     $(window)
       .blur => @browser_has_focus false
@@ -116,6 +117,20 @@ class z.ViewModel.ConversationInputViewModel
 
   toggle_extensions_menu: ->
     amplify.publish z.event.WebApp.EXTENSIONS.GIPHY.SHOW
+
+  emojipicker: ->
+    inputElement = $('#conversation-input-text')[0]
+    new EmojiPanel($('#emojipicker')[0], onClick: (emoji) =>
+      emoji_char = String.fromCodePoint "0x#{emoji.unified}"
+      if @input().length is 0
+        @input emoji_char
+        inputElement.focus()
+      else
+        z.util.KeyUtil.insert_at_caret inputElement, emoji_char
+      @conversation_repository.emojipicker_show false
+    )
+
+    @conversation_repository.emojipicker_show true
 
   ping: =>
     return if @ping_disabled()

@@ -549,3 +549,6 @@ class z.ViewModel.MessageListViewModel
         @conversation_repository.check_ephemeral_timer message_et if start_timer_on_focus is @conversation.id
 
     return true
+
+  emojipicker_show: =>
+    @conversation_repository.emojipicker_show()

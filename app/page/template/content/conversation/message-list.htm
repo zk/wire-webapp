@@ -1,4 +1,5 @@
  <div id="message-list" class="message-list" data-bind="with: $root.message_list, show_all_timestamps: true">
+   <div id="emojipicker" class="emojipicker-default bubble bubble-show bubble-bottom bubble-animation-show" data-bind="visible: emojipicker_show()"></div>
    <div class="messages-wrap" data-bind="antiscroll, event: {scroll: on_scroll}">
      <div class="messages"
           data-bind="css: {'flex-center': center_messages},
