@@ -131,7 +131,7 @@ class z.ViewModel.ConversationInputViewModel
       @conversation_repository.emojipicker_show false
     )
 
-    @conversation_repository.emojipicker_show true
+    @conversation_repository.emojipicker_show not @conversation_repository.emojipicker_show()
 
   ping: =>
     return if @ping_disabled()
