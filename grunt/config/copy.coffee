@@ -29,7 +29,6 @@ module.exports =
     src: [
       'ext/image/**/*'
       'ext/js/**/*'
-      'ext/emoji-panel/**/*'
       'ext/proto/**/*'
       'audio/**/*'
       'image/**/*'
@@ -48,6 +47,12 @@ module.exports =
   dist_audio:
     cwd: '<%= dir.app_ %>/ext/audio/wire-audio-files'
     dest: '<%= dir.dist %>/audio'
+    expand: true
+    src: '*'
+
+  dist_emojipanel:
+    cwd: '<%= dir.app_ %>/ext/emoji-panel'
+    dest: '<%= dir.dist %>/style/asset'
     expand: true
     src: '*'
 
@@ -73,7 +78,6 @@ module.exports =
     src: [
       'ext/image/**/*'
       'ext/js/**/*'
-      'ext/emoji-panel/**/*'
       'ext/proto/**/*'
       'audio/**/*'
       'image/**/*'
@@ -86,6 +90,12 @@ module.exports =
   deploy_audio:
     cwd: '<%= dir.app_ %>/ext/audio/wire-audio-files'
     dest: '<%= dir.deploy %>/audio'
+    expand: true
+    src: '*'
+
+  deploy_emojipanel:
+    cwd: '<%= dir.app_ %>/ext/emoji-panel'
+    dest: '<%= dir.deploy %>/style/asset'
     expand: true
     src: '*'
 
