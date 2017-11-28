@@ -54,6 +54,7 @@ z.tracking.EventTrackingRepository = class EventTrackingRepository {
           z.tracking.EventName.CALLING.RECEIVED_CALL,
           z.tracking.EventName.CALLING.RECEIVED_VIDEO_CALL,
           z.tracking.EventName.CALLING.SHARED_SCREEN,
+          z.tracking.EventName.CALLING.QUALITY_METRICS,
           z.tracking.EventName.CONTRIBUTED,
           z.tracking.EventName.E2EE.FAILED_MESSAGE_DECRYPTION,
           z.tracking.EventName.REGISTRATION.ENTERED_CREDENTIALS,

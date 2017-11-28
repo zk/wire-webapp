@@ -27,6 +27,9 @@ z.ViewModel.ModalType = {
   BOTS_UNAVAILABLE: '.modal-bots-unavailable',
   CALL_EMPTY_CONVERSATION: '.modal-call-conversation-empty',
   CALL_NO_VIDEO_IN_GROUP: '.modal-call-no-video-in-group',
+  //add proper names for the two steps
+  CALL_QUALITY_1: '.modal-call-quality-one',
+  CALL_QUALITY_2: '.modal-call-quality-two',
   CALL_START_ANOTHER: '.modal-call-second',
   CALLING: '.modal-calling',
   CLEAR: '.modal-clear',
@@ -85,6 +88,12 @@ z.ViewModel.ModalsViewModel = class ModalsViewModel {
         break;
       case z.ViewModel.ModalType.CALL_START_ANOTHER:
         this._show_modal_call_start_another(options.data, title_element, message_element);
+        break;
+      case z.ViewModel.ModalType.CALL_QUALITY_1:
+        this._show_modal_call_quality_one();
+        break;
+      case z.ViewModel.ModalType.CALL_QUALITY_2:
+        this._show_modal_call_quality_two(options.data);
         break;
       case z.ViewModel.ModalType.CLEAR:
         type = this._show_modal_clear(options, type);
@@ -201,6 +210,30 @@ z.ViewModel.ModalsViewModel = class ModalsViewModel {
     action_element.text(z.l10n.text(z.string[`modal_call_second_${call_state}_action`]));
     message_element.text(z.l10n.text(z.string[`modal_call_second_${call_state}_message`]));
     return title_element.text(z.l10n.text(z.string[`modal_call_second_${call_state}_headline`]));
+  }
+
+  _show_modal_call_quality_one() {
+    $(z.ViewModel.ModalType.CALL_QUALITY_1)
+      .find('.modal-option')
+      .click(event => {
+        const options = {
+          data: {
+            step_1: event.currentTarget.dataset.value,
+          },
+        };
+
+        this.show_modal(z.ViewModel.ModalType.CALL_QUALITY_2, options);
+      });
+  }
+
+  _show_modal_call_quality_two(quality_data) {
+    $(z.ViewModel.ModalType.CALL_QUALITY_2)
+      .find('.modal-option')
+      .click(event => {
+        quality_data.step_2 = event.currentTarget.dataset.value;
+        this.logger.log('Sending call quality metrics', quality_data);
+        amplify.publish(z.event.WebApp.ANALYTICS.EVENT, z.tracking.EventName.CALLING.QUALITY_METRICS, quality_data);
+      });
   }
 
   _show_modal_clear(options, type) {

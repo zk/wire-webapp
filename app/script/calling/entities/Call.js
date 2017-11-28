@@ -316,6 +316,7 @@ z.calling.entities.Call = class Call {
 
         this.set_self_state(false, termination_reason);
         this.deactivate_call(call_message_et, termination_reason);
+        amplify.publish(z.event.WebApp.WARNING.MODAL, z.ViewModel.ModalType.CALL_QUALITY_1);
       });
   }
 

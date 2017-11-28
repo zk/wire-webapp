@@ -161,6 +161,16 @@ z.string.modal_call_second_ongoing_action = 'Hang Up';
 z.string.modal_call_second_outgoing_headline = 'Hang up current call?';
 z.string.modal_call_second_outgoing_message = 'You can only be in one call at a time.';
 z.string.modal_call_second_outgoing_action = 'Hang Up';
+// Call quality metrics
+z.string.modal_call_quality_one_headline = 'Screen One Headline';
+z.string.modal_call_quality_one_message = 'Screen One Message';
+z.string.modal_call_quality_two_headline = 'Screen Two Headline';
+z.string.modal_call_quality_two_message = 'Screen Two Message';
+z.string.modal_button_one = '1';
+z.string.modal_button_two = '2';
+z.string.modal_button_three = '3';
+z.string.modal_button_four = '4';
+z.string.modal_button_five = '5';
 // Clear a conversation
 z.string.modal_clear_conversation_headline = 'Delete content?';
 z.string.modal_clear_conversation_message = 'This will clear the conversation history and remove it from your list.';
