@@ -162,10 +162,11 @@ z.string.modal_call_second_outgoing_headline = 'Hang up current call?';
 z.string.modal_call_second_outgoing_message = 'You can only be in one call at a time.';
 z.string.modal_call_second_outgoing_action = 'Hang Up';
 // Call quality metrics
-z.string.modal_call_quality_one_headline = 'Screen One Headline';
-z.string.modal_call_quality_one_message = 'Screen One Message';
-z.string.modal_call_quality_two_headline = 'Screen Two Headline';
-z.string.modal_call_quality_two_message = 'Screen Two Message';
+z.string.modal_call_quality_one_headline = 'Call Quality Survey';
+z.string.modal_call_quality_one_message = 'How satisfied are you with the call set up?';
+z.string.modal_call_quality_description_message = 'The scale ranges: bad(1) - poor(2) - fair(3) - good(4) - excellent(5)';
+z.string.modal_call_quality_two_headline = 'Call Quality Survey';
+z.string.modal_call_quality_two_message = 'How satisfied are you with the overall quality of the call?';
 z.string.modal_button_one = '1';
 z.string.modal_button_two = '2';
 z.string.modal_button_three = '3';

@@ -243,6 +243,7 @@ z.calling.entities.Call = class Call {
   delete_call() {
     this.state(z.calling.enum.CALL_STATE.ENDED);
     this.reset_call();
+    amplify.publish(z.event.WebApp.WARNING.MODAL, z.ViewModel.ModalType.CALL_QUALITY_1);
   }
 
   /**
