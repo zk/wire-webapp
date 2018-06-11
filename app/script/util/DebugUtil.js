@@ -58,6 +58,10 @@ z.util.DebugUtil = class DebugUtil {
       .then(() => this.logger.log(`Corrupted Session ID '${sessionId}'`));
   }
 
+  exportCryptobox() {
+    wire.app.repository.cryptography.cryptobox.serialize().then(cryptobox => {});
+  }
+
   getEventInfo(event) {
     const debugInformation = {event};
 
