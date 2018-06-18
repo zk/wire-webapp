@@ -39,7 +39,7 @@ z.tracking.EventTrackingRepository = class EventTrackingRepository {
       USER_ANALYTICS: {
         API_KEY: MIXPANEL_TOKEN,
         CLIENT_TYPE: 'desktop',
-        DISABLED_DOMAINS: ['localhost', 'zinfra.io'],
+        DISABLED_DOMAINS: ['localhost', 'prt.im'],
         DISABLED_EVENTS: [
           z.tracking.EventName.CALLING.FAILED_REQUEST,
           z.tracking.EventName.CALLING.FAILED_REQUESTING_MEDIA,

@@ -170,12 +170,12 @@ def get_url():
   if 'localhost' in host or '127.0.0.1' in host:
     protocol = 'http://'
 
-  if 'app.wire.com' in host:
-    host = 'app.wire.com'
+  if 'app.protime.network' in host:
+    host = 'app.protime.network'
   elif 'next' in host:
-    host = 'wire-webapp-prod-next.wire.com'
+    host = 'wire-webapp-prod-next.protime.network'
   elif 'staging' in host:
-    host = 'wire-webapp-staging.zinfra.io'
+    host = 'prt.im'
 
   url = '%s%s%s' % (protocol, host, flask.request.path)
   return url

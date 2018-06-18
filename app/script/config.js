@@ -35,11 +35,9 @@ window.z.config = {
   LOGGER: {
     OPTIONS: {
       domains: {
-        'app.wire.com': () => 0,
+        'app.protime.network': () => 0,
         localhost: () => 300,
-        'wire.ms': () => 300,
-        'wire-webapp-staging.wire.com': () => 300,
-        'zinfra.io': () => 300,
+        'prt.im': () => 300,
       },
       name_length: 65,
     },
@@ -92,22 +90,22 @@ window.z.config = {
 
   URL: {
     ACCOUNT: {
-      PRODUCTION: 'https://account.wire.com',
-      STAGING: 'https://wire-account-staging.zinfra.io',
+      PRODUCTION: 'https://account.protime.network',
+      STAGING: 'https://prt.im',
     },
-    SUPPORT: 'https://support.wire.com',
+    SUPPORT: 'https://support.protime.network',
     TEAM_SETTINGS: {
-      PRODUCTION: 'https://teams.wire.com',
-      STAGING: 'https://wire-admin-staging.zinfra.io',
+      PRODUCTION: 'https://teams.protime.network',
+      STAGING: 'https://prt.im',
     },
     WEBAPP: {
-      INTERNAL: 'https://wire-webapp-staging.wire.com',
-      PRODUCTION: 'https://app.wire.com',
-      STAGING: 'https://wire-webapp-staging.zinfra.io',
+      INTERNAL: 'https://prt.im',
+      PRODUCTION: 'https://app.protime.network',
+      STAGING: 'https://prt.im',
     },
     WEBSITE: {
-      PRODUCTION: 'https://wire.com',
-      STAGING: 'https://wire-website-staging.zinfra.io',
+      PRODUCTION: 'https://protime.network',
+      STAGING: 'https://prt.im',
     },
   },
 
