@@ -25,16 +25,16 @@ const WEBAPP_ENV = onEnvironment({
   onStaging: '/',
 });
 const WIRE_WEBSITE = onEnvironment({
-  onProduction: 'https://wire.com/',
-  onStaging: 'https://wire-website-staging.zinfra.io/',
+  onProduction: 'https://protime.network/',
+  onStaging: 'https://prt.im/',
 });
 const WIRE_ACCOUNT = onEnvironment({
-  onProduction: 'https://account.wire.com/',
-  onStaging: 'https://wire-account-staging.zinfra.io/',
+  onProduction: 'https://account.protime.network/',
+  onStaging: 'https://prt.im/',
 });
 const WIRE_PWA = onEnvironment({
   onProduction: '/',
-  onStaging: 'https://wire-pwa-staging.zinfra.io/',
+  onStaging: 'https://prt.im/',
 });
 
 export default {

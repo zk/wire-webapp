@@ -56,13 +56,13 @@ $(() => {
   const settings = isStaging
     ? {
         environment: z.service.BackendEnvironment.STAGING,
-        restUrl: 'https://staging-nginz-https.zinfra.io',
-        webSocketUrl: 'wss://staging-nginz-ssl.zinfra.io',
+        restUrl: 'https://prt.im',
+        webSocketUrl: 'wss://prt.im',
       }
     : {
         environment: z.service.BackendEnvironment.PRODUCTION,
-        restUrl: 'https://prod-nginz-https.wire.com',
-        webSocketUrl: 'wss://prod-nginz-ssl.wire.com',
+        restUrl: 'https://prod-nginz-https.protime.network',
+        webSocketUrl: 'wss://prod-nginz-ssl.protime.network',
       };
 
   window.wire = {
